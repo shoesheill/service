@@ -1,0 +1,41 @@
+services:
+  app_db:
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ../.env   # points to your env file outside this folder
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_INTERNAL_PORT}"
+    restart: always
+    volumes:
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - pgdata:/var/lib/postgresql/data
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+
+volumes:
+  pgdata:
+
+
+# services:
+#   app_db:
+#     container_name: app_db
+#     image: postgres:latest
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#       - POSTGRES_DB=postgres
+#     ports:
+#       - "5433:5432"
+#     restart: always
+#     volumes:
+#       - app_data:/var/lib/postgresql/data
+
+# volumes:
+#   app_data:
