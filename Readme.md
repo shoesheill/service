@@ -71,6 +71,6 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 Now `Postgresql` can be connected using `Windows` IP and `LISTEN_PORT`
 
-**WSL** Might not Start When **Windows** is reboot, in such sitations please Read guidlines for wsl auto start 
+**WSL** Might not Start When **Windows** is reboot, in such sitations please Read guidlines for `WSL Auto Start & Keep-Alive Setup.md`
 
 ------------------
