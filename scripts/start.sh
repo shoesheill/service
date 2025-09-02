@@ -7,6 +7,14 @@ echo "Starting Docker containers...PROJECT_PATH: $PROJECT_PATH"
 # go to project docker folder and start
 cd "$PROJECT_PATH/docker"
 $DOCKER_COMPOSE_UP_BUILD
+
+# BACKUP_SCRIPT="$PROJECT_PATH/scripts/pg-backup.sh"
+# if [ -f "$BACKUP_SCRIPT" ]; then
+#     echo "Setting up Postgres backup..."
+#     bash "$BACKUP_SCRIPT"
+# else
+#     echo "Backup script not found at $BACKUP_SCRIPT"
+# fi
 echo "Docker containers started."
 echo "To check status, use: sudo systemctl status $SERVICE_FILE"
 echo "To view logs, use: sudo journalctl -u $SERVICE_FILE -f"
