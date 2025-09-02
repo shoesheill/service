@@ -1,29 +1,5 @@
 ## Install Asec Services On WSL
 ------------
-
-### Path selection rule (Windows / WSL)
-**If the file exists on the Windows-mounted path (`/mnt/d/...`), use that path.**
-**Else, use the default WSL path (`/asec/...`).**
-```bash
-# fow WSL
-# on .env
-ROOT_DIR="/asec"
-# on service/systemd/asec.service
-ExecStart=/bin/bash /asec/service/scripts/start.sh
-ExecStop=/bin/bash /asec/service//scripts/stop.sh
-
-# If Windows
-# on .env
-ROOT_DIR="/mnt/DriveName/asec"
-# on service/systemd/asec.service
-ExecStart=/bin/bash /mnt/DriveName/asec/service/scripts/start.sh
-ExecStop=/bin/bash /mnt/DriveName/asec/service//scripts/stop.sh
-```
-**Set Proper Useranme for access**
-If WSL username is not `asec` change the `User=asec` on `asec/service/systemd/asec.service`
-```script
-User=asec
-```
 **If you want to keep your files on WSL**
 
 **Copy the folder asec to `/asec`**
@@ -49,13 +25,17 @@ ip addr show;
 ```bash
 cd /asec/service/scripts
 sudo chmod +x *.sh
+./create-env.sh
+./create-service.sh
 ./setup-docker.sh
 ./setup-service.sh
 ```
 **Now check the service status**
 ```bash
-# for asec service
-sudo systemctl status asec.service
+ # servicename is on .env as SERVICE_FILE
+sudo systemctl status servicename.service 
+# for asec.service
+# sudo systemctl status asec.service
 # for docker
 docker ps
 ```
@@ -65,7 +45,7 @@ docker ps
 **Now start `powershell` run as administrator** 
 ```bash
 # locate to services folder
-cd d:/asec/service/scripts
+cd <directory-on-windows>/scripts
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ./setup-wsl-portproxy.ps1
 ```
