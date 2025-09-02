@@ -14,8 +14,8 @@ sudo nano .env
 **Change the desired `PostgreSQL Configuration `**
 
 **On  Port Proxy**
-`LISTEN_PORT=5432` is the port where windows will expose for external connections
-`WSL_IP=172.26.114.208` is the IP Address of the WSL can get using 
+`LISTEN_PORT=5432` is the port where windows will expose for external connections, you can set it
+<!-- `WSL_IP=172.26.114.208` is the IP Address of the WSL can get using  -->
 ```bash 
 # use this command to view WLS IP inside WSL, and use the IP address of eth0:
 ip addr show;
