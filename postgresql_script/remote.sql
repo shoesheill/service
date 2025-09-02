@@ -29,10 +29,22 @@ SELECT pglogical.create_node(
        );
 SELECT pglogical.create_subscription(
                subscription_name := 'sub_local_to_remote',
-               provider_dsn := 'host=192.168.242.94 port=8080 dbname=postgres user=postgres
+               provider_dsn := 'host=192.168.242.99 port=8080 dbname=postgres user=postgres
 password=postgres',
-               replication_sets := '{local_to_remote}'
+               replication_sets := '{local_to_remote}',
+               synchronize_structure := false,   -- Create tables
+               synchronize_data := true        -- Copy all existing data
        );
+-- SELECT pglogical.alter_subscription(
+--                subscription_name := 'sub_local_to_remote',
+--                provider_dsn := 'host=192.168.242.99 port=8080 dbname=postgres user=postgres
+-- password=postgres'
+--                    );
+-- SELECT pglogical.drop_subscription('sub_local_to_remote');
+-- SELECT pglogical.alter_subscription(
+--                subscription_name := 'sub_local_to_remote',
+--                provider_dsn := 'host=192.168.242.99 port=8080 dbname=postgres user=postgres password=postgres'
+--        );
 
 SELECT pglogical.create_replication_set('remote_to_local');
 
@@ -43,9 +55,11 @@ SELECT * FROM pglogical.replication_set;
 select  * from pglogical.subscription;
 
 SELECT * FROM pg_stat_replication;
+--  synchronize_data use in publisher to allow initial data sync and on subscriber to tull existing data from publisher
+-- synchronize_structure  use only on subscriber to sync schema of the table
 
 insert into "Users" ("Name", "Email", "Address", "Phone")
-values ('Sushil','sushil@asec.jp','立花','09054600662');
+values ('Sushil1','sushil@asec.jp','立花','09054600662');
 
 insert into "Users" ("Name", "Email", "Address", "Phone")
 values ('末村','shimura@asec.jp','尼崎','09054600558');
