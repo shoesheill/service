@@ -26,9 +26,12 @@ ip addr show;
 cd /asec/service/scripts
 sudo chmod +x *.sh
 ./create-env.sh
+./set-directory.sh
 ./create-service.sh
 ./setup-docker.sh
 ./setup-service.sh
+# Optional
+./pg-backup.sh # for regular backups
 ```
 **Now check the service status**
 ```bash
