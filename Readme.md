@@ -1,12 +1,6 @@
 ## Install Asec Services On WSL
 ------------
-**If you want to keep your files on WSL**
 
-**Copy the folder asec to `/asec`**
-```bash
-sudo mkdir -p /asec
-sudo cp -r <file-source> /asec # sudo cp -r /mnt/d/asec/service /asec
-```
 **Verfiy Environment variables**
 ```bash
 sudo nano .env
@@ -15,15 +9,18 @@ sudo nano .env
 
 **On  Port Proxy**
 `LISTEN_PORT=5432` is the port where windows will expose for external connections, you can set it
-<!-- `WSL_IP=172.26.114.208` is the IP Address of the WSL can get using  -->
-```bash 
-# use this command to view WLS IP inside WSL, and use the IP address of eth0:
-ip addr show;
+**If you want to keep your files on WSL (Optional)**
+
+**Copy the folder asec to `/asec` (optional)**
+```bash
+sudo mkdir -p /asec
+sudo cp -r <file-source> /asec # sudo cp -r /mnt/d/asec/service /asec
 ```
 
 **Now, go to the `service/scripts`**
 ```bash
-cd /asec/service/scripts
+#cd /asec/service/scripts
+cd ../scripts
 sudo chmod +x *.sh
 ./create-env.sh
 ./set-directory.sh

@@ -9,7 +9,6 @@
 # 0. Load .env
 # -------------------------------
 $envFile = Join-Path (Split-Path $MyInvocation.MyCommand.Path -Parent) "..\.env"
-
 if (-not (Test-Path $envFile)) {
     Write-Error "Cannot find .env file at $envFile"
     exit 1
